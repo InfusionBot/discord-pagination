@@ -1,0 +1,17 @@
+{
+  "source": {
+    "includePattern": ".+\\.ts(doc|x)?$"
+  },
+  "plugins": [
+    "plugins/markdown",
+    "node_modules/jsdoc-plugin-typescript"
+  ],
+  "typescript": {
+    "moduleRoot": "lib"
+  },
+  "opts": {
+    "encoding": "utf8",
+    "destination": "./docs/",
+    "readme": "./README.md"
+  }
+}

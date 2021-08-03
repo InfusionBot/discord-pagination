@@ -1,0 +1,46 @@
+{
+  "name": "djs-pagination-buttons",
+  "version": "0.1.0",
+  "description": "Discord.js v13 pagination with buttons",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
+    "docs": "jsdoc -r lib -c jsdoc.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Welcome-Bot/discord-pagination"
+  },
+  "keywords": [
+    "discord",
+    "js",
+    "ts",
+    "discord-js",
+    "djs-v13"
+  ],
+  "author": "Welcome-Bot",
+  "license": "LGPL-2.1-only",
+  "bugs": {
+    "url": "https://github.com/Welcome-Bot/discord-pagination/issues"
+  },
+  "homepage": "https://github.com/Welcome-Bot/discord-pagination#readme",
+  "devDependencies": {
+    "@types/node": "^16.4.10",
+    "@typescript-eslint/eslint-plugin": "^4.29.0",
+    "discord.js": "^13.0.0-dev.t1627906063.6e0ea02",
+    "eslint": "^7.29.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "jsdoc": "^3.6.7",
+    "jsdoc-plugin-typescript": "^2.0.6",
+    "prettier": "^2.3.2",
+    "typescript": "^4.2.3"
+  }
+}
