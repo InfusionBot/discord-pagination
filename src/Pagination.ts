@@ -113,7 +113,7 @@ class Pagination {
     public send() {
         if (!this.channel) throw new Error("Channel not set");
         if (!this.pages) throw new Error("Pages not set");
-        this.channel.send({embeds: [this.pages[this.page]]}).then((msg => return msg;)).catch(console.error);
+        this.channel.send({ embeds: [this.pages[this.page]] }).then((msg => {return msg;})).catch(console.error);
     }
 }
 
