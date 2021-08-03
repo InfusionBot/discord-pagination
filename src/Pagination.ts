@@ -49,10 +49,10 @@ class Pagination {
 
     /**
      * Text channel to send embed
-     * @type {TextChannel}
+     * @type {TextChannel | DMChannel}
      * @private
      */
-    private channel: TextChannel;
+    private channel: TextChannel | DMChannel;
 
     constructor(client: Client, options: PaginationOptions) {
         this.client = client;
@@ -98,7 +98,7 @@ class Pagination {
     /**
      * Set Array of pages to paginate
      * @param array - Those pages
-     * @return boolen
+     * @return {boolen}
      */
     public setPages(array: Array<MessageEmbed>) {
         this.pages = array;
@@ -108,17 +108,17 @@ class Pagination {
     /**
      * Set channel where the embed dhould be sent
      * @param channel - A TextChannel
-     * @return boolen
+     * @return {boolen}
      */
     public setChannel(channel: TextChannel | DMChannel) {
-        if (!channel instanceof TextChannel) throw new TypeError("Pagination.setChannel() requires channel to be an instance of MessageEmbed");
+        if (!channel instanceof TextChannel || !channel instanceof DMChannel) throw new TypeError("Pagination.setChannel() requires channel to be an instance of MessageEmbed");
         this.channel = channel;
         return true;
     }
 
     /**
      * Send the embed
-     * @return boolen
+     * @return {boolen}
      */
     public send() {
         if (!this.channel) throw new Error("Channel not set");
