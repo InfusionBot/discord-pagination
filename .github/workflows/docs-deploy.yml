@@ -1,11 +1,10 @@
-name: Deployment
+name: Docs
 on:
   push:
     branches:
-      - '*'
-      - '!docs'
-    tags:
-      - '*'
+      - main
+  workflow_dispatch:
+
 jobs:
   docs:
     name: Documentation
@@ -13,16 +12,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
       - name: Install Node v14
         uses: actions/setup-node@v2
         with:
           node-version: 14
-
       - name: Install dependencies
         run: npm install
-
-      - name: Build and deploy documentation
-        uses: discordjs/action-docs@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build documentation
+        run: npm run docs
+      - name: Commit and push changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: github-actions[bot]
+          author_email: 41898282+github-actions[bot]@users.noreply.github.com
+          message: "docs: :zap: build"
