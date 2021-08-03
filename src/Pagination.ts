@@ -3,7 +3,17 @@ import { PaginationOptions } from "./types";
 
 /** Pagination class */
 class Pagination {
+    /**
+     * The discord.js Client
+     * @type {Client}
+     */
     public readonly client: Client;
+
+    /**
+     * Pagination Options
+     * @type {PaginationOptions}
+     * @private
+     */
     private options: PaginationOptions = {
         nextBtn: {
             label: "Next",
@@ -15,22 +25,52 @@ class Pagination {
         },
         timeout: 3000,
     };
-    private page: number = 0;
+
+    /**
+     * The page number
+     * @type {number}
+     * @private
+     */
+    private page: number;
+
+    /**
+     * The the action row which will contain the buttons
+     * @type {MessageActionRow}
+     * @private
+     */
     private _actionRow: MessageActionRow;
+
+    /**
+     * Pages
+     * @type {Array<MessageEmbed>}
+     * @private
+     */
     private pages: Array<MessageEmbed>;
+
+    /**
+     * Text channel to send embed
+     * @type {TextChannel}
+     * @private
+     */
     private channel: TextChannel;
 
     constructor(client: Client, options: PaginationOptions = {}) {
-        /**
-         * The discord.js Client
-         * @type {Client}
-         */
         this.client = client;
-        /**
-         * Pagination Options
-         * @type {PaginationOptions}
-         */
         this.options = Object.assign(this.options, options);
+        this.page = 0;
+        this._actionRow = new MessageActionRow();
+        const nextButton = new MessageButton()
+            .setLabel(this.options.nextBtn.label)
+            .setStyle(this.options.nextBtn.style)
+            .setCustomId("nextBtn");
+        const backButton = new MessageButton()
+            .setLabel(this.options.backBtn.label)
+            .setStyle(this.options.backBtn.style)
+            .setCustomId("backBtn");
+        this._actionRow.addComponents(
+            nextButton,
+            backButton,
+        );
         this.client.on("interactionCreate", (interaction: any) => {
             if (!interaction.isButton()) return;
             const ids = ["nextBtn", "backBtn"];
@@ -56,50 +96,19 @@ class Pagination {
     }
 
     /**
-     * Build the Embed
-     * @param embedOptions - The MessageEmbedOptions provided by discord.js
-     */
-    public build() {
-        /**
-         * The the action row which will contain the buttons
-         * @type {MessageActionRow}
-         * @private
-         */
-        this._actionRow = new MessageActionRow();
-        const nextButton = new MessageButton()
-            .setLabel(this.options.nextBtn.label)
-            .setStyle(this.options.nextBtn.style)
-            .setCustomId("nextBtn");
-        const backButton = new MessageButton()
-            .setLabel(this.options.backBtn.label)
-            .setStyle(this.options.backBtn.style)
-            .setCustomId("backBtn");
-        this._actionRow.addComponents(
-            nextButton,
-            backButton,
-        );
-    }
-
-    /**
      * Set Array of pages to paginate
      * @param array - Those pages
+     * @return boolen
      */
     public setPages(array: Array<MessageEmbed>) {
         this.pages = array;
-    }
-
-    /**
-     * Sets the time for awaiting a user action before timeout in ms.
-     * @param timeout - Timeout value in ms.
-     */
-    public setTimeout(timeout: number) {
-        if (typeof timeout !== "number") throw new TypeError("Pagination.setTimeout() requires timeout to be number type, received " + typeof timeout);
-        this.options.timeout = timeout;
+        return true;
     }
 
     /**
      * Set channel where the embed dhould be sent
      * @param channel - A TextChannel
+     * @return boolen
      */
     public setChannel(channel: TextChannel) {
         if (!channel instanceof TextChannel) throw new TypeError("Pagination.setChannel() requires channel to be an instance of MessageEmbed");
@@ -109,11 +118,13 @@ class Pagination {
 
     /**
      * Send the embed
+     * @return boolen
      */
     public send() {
         if (!this.channel) throw new Error("Channel not set");
         if (!this.pages) throw new Error("Pages not set");
         this.channel.send({ embeds: [this.pages[this.page]] }).then((msg => {return msg;})).catch(console.error);
+        return true;
     }
 }
 
