@@ -1,4 +1,4 @@
-import { Client, MessageEmbed, MessageActionRow, MessageButton, TextChannel } from "discord.js";
+import { Client, MessageEmbed, MessageActionRow, MessageButton, TextChannel, DMChannel } from "discord.js";
 import { PaginationOptions } from "./types";
 
 /** Pagination class */
@@ -110,7 +110,7 @@ class Pagination {
      * @param channel - A TextChannel
      * @return boolen
      */
-    public setChannel(channel: any) {
+    public setChannel(channel: TextChannel | DMChannel) {
         if (!channel instanceof TextChannel) throw new TypeError("Pagination.setChannel() requires channel to be an instance of MessageEmbed");
         this.channel = channel;
         return true;
