@@ -11,15 +11,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@master
-
       - name: Install Node v14
         uses: actions/setup-node@master
         with:
           node-version: 14
-
+      - uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Install dependencies
         run: npm ci
-
       - name: Build and deploy documentation
         uses: discordjs/action-docs@v1
         env:
