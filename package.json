@@ -1,5 +1,5 @@
 {
-  "name": "discord-pages-button",
+  "name": "djs-pagination-buttons",
   "version": "0.1.0",
   "description": "Discord.js v13 pagination with buttons",
   "main": "lib/index.js",
@@ -11,11 +11,13 @@
     "build": "tsc",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "format:check": "prettier --check .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "docs": "docgen --jsdoc jsdoc.json --source src/*.ts src/**/*.ts --custom docs/index.yml --output docs/docs.json",
+    "docs:test": "docgen --jsdoc jsdoc.json --source src/*.ts src/**/*.ts --custom docs/index.yml"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Welcome-Bot/discord-pages-button.git"
+    "url": "git+https://github.com/Welcome-Bot/discord-pagination"
   },
   "keywords": [
     "discord",
@@ -27,18 +29,22 @@
   "author": "Welcome-Bot",
   "license": "LGPL-2.1-only",
   "bugs": {
-    "url": "https://github.com/Welcome-Bot/discord-pages-button/issues"
+    "url": "https://github.com/Welcome-Bot/discord-pagination/issues"
   },
-  "homepage": "https://github.com/Welcome-Bot/discord-pages-button#readme",
+  "homepage": "https://github.com/Welcome-Bot/discord-pagination#readme",
   "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
+    "@babel/preset-typescript": "^7.14.5",
     "@types/node": "^16.4.10",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "discord.js": "^13.0.0-dev.t1627906063.6e0ea02",
-    "discord.js-docgen": "discordjs/docgen#ts-patch",
+    "@discordjs/docgen": "discordjs/docgen#ts-patch",
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "prettier": "^2.3.2",
-    "typescript": "^4.2.3"
+    "typescript": "^4.2.3",
+    "jsdoc-babel": "^0.5.0"
   }
 }
