@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "tslint": "tslint -p tsconfig.json",
     "format:check": "prettier --check .",
     "format": "prettier --write ."
   },
