@@ -54,7 +54,7 @@ class Pagination {
      */
     private channel: TextChannel;
 
-    constructor(client: Client, options: PaginationOptions = {}) {
+    constructor(client: Client, options: PaginationOptions) {
         this.client = client;
         this.options = Object.assign(this.options, options);
         this.page = 0;
@@ -85,7 +85,7 @@ class Pagination {
                     });
                     break;
                 case "backBtn":
-                    this.page = this.page > 0 ? --page : this.pages.length - 1;
+                    this.page = this.page > 0 ? --this.page : this.pages.length - 1;
                     interaction.update({
                         embeds: [this.pages[this.page]],
                         components: this._actionRow,
@@ -110,7 +110,7 @@ class Pagination {
      * @param channel - A TextChannel
      * @return boolen
      */
-    public setChannel(channel: TextChannel) {
+    public setChannel(channel: any) {
         if (!channel instanceof TextChannel) throw new TypeError("Pagination.setChannel() requires channel to be an instance of MessageEmbed");
         this.channel = channel;
         return true;
