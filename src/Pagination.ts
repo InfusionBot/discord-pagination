@@ -106,12 +106,12 @@ class Pagination {
     }
 
     /**
-     * Set channel where the embed dhould be sent
+     * Set the channel where the embed should be sent
      * @param channel - A TextChannel
      * @return {boolen}
      */
     public setChannel(channel: TextChannel | DMChannel) {
-        if (!channel instanceof TextChannel || !channel instanceof DMChannel) throw new TypeError("Pagination.setChannel() requires channel to be an instance of MessageEmbed");
+        if (!(channel instanceof TextChannel) && !(channel instanceof DMChannel)) throw new TypeError("Pagination.setChannel() requires channel to be an instance of TextChannel or DMChannel");
         this.channel = channel;
         return true;
     }
