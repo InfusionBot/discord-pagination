@@ -75,7 +75,6 @@ class Pagination {
             if (!interaction.isButton()) return;
             const ids = ["nextBtn", "backBtn"];
             if (ids.indexOf(interaction.customId) === -1) return;
-            interaction.defer();
             switch(interaction.customId) {
                 case "nextBtn":
                     this.page = this.page + 1 < this.pages.length ? ++this.page : 0;
