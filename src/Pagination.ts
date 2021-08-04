@@ -87,32 +87,30 @@ class Pagination {
         this.client.on("interactionCreate", (interaction: any) => {
             if (!interaction.isButton()) return;
             const ids = ["nextBtn", "backBtn"];
-            const filter = (i: any) => ids.indexOf(i.customId) > 0 && this.authorizedUsers.indexOf(i.user.id) > 0;
-            const collector = interaction.channel.createMessageComponentCollector({ filter, time: this.options.timeout });
-            collector.on("collect", async (i: any) => {
-                switch(i.customId) {
-                    case "nextBtn":
-                        this.page = this.page + 1 < this.pages.length ? ++this.page : 0;
-                        i.update({
-                            embeds: [this.pages[this.page]],
-                            components: [this._actionRow],
-                        });
-                        break;
-                    case "backBtn":
-                        this.page = this.page > 0 ? --this.page : this.pages.length - 1;
-                        i.update({
-                            embeds: [this.pages[this.page]],
-                            components: [this._actionRow],
-                        });
-                        break;
-                }
-            });
-            collector.on("end", async (i: any) => {
-                i.update({
+            const filter = (i: any) => (ids.includes(i.customId) && this.authorizedUsers.includes(i.user.id));
+            if (!(filter(interaction))) return;
+            switch (i.customId) {
+                case "nextBtn":
+                    this.page = this.page + 1 < this.pages.length ? ++this.page : 0;
+                    i.update({
+                        embeds: [this.pages[this.page]],
+                        components: [this._actionRow],
+                    });
+                    break;
+                case "backBtn":
+                    this.page = this.page > 0 ? --this.page : this.pages.length - 1;
+                    i.update({
+                        embeds: [this.pages[this.page]],
+                        components: [this._actionRow],
+                    });
+                    break;
+            }
+            setTimeout(() => {
+                interaction.update({
                     embeds: [this.pages[this.page]],
                     components: [this._actionRowEnd],
                 });
-            })
+            }, this.options.timeout);
         });
     }
 
