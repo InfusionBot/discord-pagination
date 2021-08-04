@@ -92,21 +92,21 @@ class Pagination {
             switch (interaction.customId) {
                 case "nextBtn":
                     this.page = this.page + 1 < this.pages.length ? ++this.page : 0;
-                    interaction.update({
+                    interaction.editReply({
                         embeds: [this.pages[this.page]],
                         components: [this._actionRow],
                     });
                     break;
                 case "backBtn":
                     this.page = this.page > 0 ? --this.page : this.pages.length - 1;
-                    interaction.update({
+                    interaction.editReply({
                         embeds: [this.pages[this.page]],
                         components: [this._actionRow],
                     });
                     break;
             }
             setTimeout(() => {
-                interaction.update({
+                interaction.editReply({
                     embeds: [this.pages[this.page]],
                     components: [this._actionRowEnd],
                 });
@@ -130,7 +130,7 @@ class Pagination {
      * @return {boolen}
      */
     public setChannel(channel: TextChannel | DMChannel) {
-        if (!(channel instanceof TextChannel) && !(channel instanceof DMChannel)) throw new TypeError("Pagination.setChannel() requires channel to be an instance of TextChannel or DMChannel");
+        if (!channel.isText()) throw new TypeError("Pagination.setChannel() requires channel to be an text channel (instance of TextChannel or DMChannel)");
         this.channel = channel;
         return true;
     }
