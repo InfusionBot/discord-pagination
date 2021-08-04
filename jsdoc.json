@@ -1,6 +1,6 @@
 {
   "source": {
-    "includePattern": "\\.(jsx|js|ts|tsx)$",
+    "includePattern": "\\.(jsx|js|ts|tsx)$"
   },
   "plugins": [
     "plugins/markdown",
