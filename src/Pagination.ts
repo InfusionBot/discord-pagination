@@ -74,7 +74,7 @@ class Pagination {
         this.client.on("interactionCreate", (interaction: any) => {
             if (!interaction.isButton()) return;
             const ids = ["nextBtn", "backBtn"];
-            if (!ids.includes(interaction.customId)) return;
+            if (ids.indexOf(interaction.customId) === -1) return;
             interaction.defer();
             switch(interaction.customId) {
                 case "nextBtn":
@@ -123,7 +123,9 @@ class Pagination {
     public send() {
         if (!this.channel) throw new Error("Channel not set");
         if (!this.pages) throw new Error("Pages not set");
-        this.channel.send({ embeds: [this.pages[this.page]] }).then((msg => {return msg;})).catch(console.error);
+        this.channel.send({ embeds: [this.pages[this.page]] })
+            .then((msg: any) => {return msg;})
+            .catch(console.error);
         return true;
     }
 }

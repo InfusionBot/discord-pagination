@@ -1,10 +1,10 @@
 {
   "source": {
-    "includePattern": ".+\\.ts(doc|x)?$"
+    "includePattern": "\\.(jsx|js|ts|tsx)$",
   },
   "plugins": [
     "plugins/markdown",
-    "node_modules/jsdoc-plugin-typescript"
+    "node_modules/better-docs/typescript"
   ],
   "typescript": {
     "moduleRoot": "lib"
@@ -12,6 +12,10 @@
   "opts": {
     "encoding": "utf8",
     "destination": "./docs/",
-    "readme": "./README.md"
+    "readme": "./README.md",
+    "template": "node_modules/better-docs"
+  },
+  "tags": {
+    "allowUnknownTags": ["optional"]
   }
 }
