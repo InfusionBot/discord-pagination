@@ -86,9 +86,9 @@ class Pagination {
         this.client.on("interactionCreate", (interaction: any) => {
             if (!interaction.isButton()) return;
             const ids = ["nextBtn", "backBtn"];
-            const filter = i => ids.indexOf(i.customId) > 0 && this.authorizedUsers.indexOf(i.user.id) > 0;
+            const filter = (i: any) => ids.indexOf(i.customId) > 0 && this.authorizedUsers.indexOf(i.user.id) > 0;
             const collector = interaction.channel.createMessageComponentCollector({ filter, time: this.options.timeout });
-            collector.on("collect", async (i) => {
+            collector.on("collect", async (i: any) => {
                 switch(i.customId) {
                     case "nextBtn":
                         this.page = this.page + 1 < this.pages.length ? ++this.page : 0;
@@ -106,7 +106,7 @@ class Pagination {
                         break;
                 }
             });
-            collector.on("end", async (i) => {
+            collector.on("end", async (i: any) => {
                 i.update({
                     embeds: [this.pages[this.page]],
                     components: [this._actionRowEnd],
@@ -153,6 +153,7 @@ class Pagination {
     public send() {
         if (!this.channel) throw new Error("Channel not set");
         if (!this.pages) throw new Error("Pages not set");
+        if (!this.authorizedUsers) throw new Error("Authorized Users not set");
         this.channel.send({
             embeds: [this.pages[this.page]],
             components: [this._actionRow],
