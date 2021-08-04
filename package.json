@@ -1,6 +1,6 @@
 {
   "name": "djs-pagination-buttons",
-  "version": "0.1.0-rc1",
+  "version": "0.1.0-rc2",
   "description": "Discord.js v13 pagination with buttons",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
