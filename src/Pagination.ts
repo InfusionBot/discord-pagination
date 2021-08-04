@@ -67,6 +67,7 @@ class Pagination {
         this.options = Object.assign(this.options, options);
         this.page = 0;
         this._actionRow = new MessageActionRow();
+        this._actionRowEnd = new MessageActionRow();
         const nextButton = new MessageButton()
             .setLabel(this.options.nextBtn.label)
             .setStyle(this.options.nextBtn.style)
