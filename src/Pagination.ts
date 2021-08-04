@@ -81,14 +81,14 @@ class Pagination {
                     this.page = this.page + 1 < this.pages.length ? ++this.page : 0;
                     interaction.update({
                         embeds: [this.pages[this.page]],
-                        components: this._actionRow,
+                        components: [this._actionRow],
                     });
                     break;
                 case "backBtn":
                     this.page = this.page > 0 ? --this.page : this.pages.length - 1;
                     interaction.update({
                         embeds: [this.pages[this.page]],
-                        components: this._actionRow,
+                        components: [this._actionRow],
                     });
                     break;
             }
@@ -125,7 +125,7 @@ class Pagination {
         if (!this.pages) throw new Error("Pages not set");
         this.channel.send({
             embeds: [this.pages[this.page]],
-            components: this._actionRow,
+            components: [this._actionRow],
         })
             .then((msg: any) => {return msg;})
             .catch(console.error);
