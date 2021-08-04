@@ -89,17 +89,17 @@ class Pagination {
             const ids = ["nextBtn", "backBtn"];
             const filter = (i: any) => (ids.includes(i.customId) && this.authorizedUsers.includes(i.user.id));
             if (!(filter(interaction))) return;
-            switch (i.customId) {
+            switch (interaction.customId) {
                 case "nextBtn":
                     this.page = this.page + 1 < this.pages.length ? ++this.page : 0;
-                    i.update({
+                    interaction.update({
                         embeds: [this.pages[this.page]],
                         components: [this._actionRow],
                     });
                     break;
                 case "backBtn":
                     this.page = this.page > 0 ? --this.page : this.pages.length - 1;
-                    i.update({
+                    interaction.update({
                         embeds: [this.pages[this.page]],
                         components: [this._actionRow],
                     });
