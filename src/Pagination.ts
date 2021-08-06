@@ -92,14 +92,14 @@ class Pagination {
             switch (interaction.customId) {
                 case "nextBtn":
                     this.page = this.page + 1 < this.pages.length ? ++this.page : 0;
-                    interaction.editReply({
+                    interaction.update({
                         embeds: [this.pages[this.page]],
                         components: [this._actionRow],
                     });
                     break;
                 case "backBtn":
                     this.page = this.page > 0 ? --this.page : this.pages.length - 1;
-                    interaction.editReply({
+                    interaction.update({
                         embeds: [this.pages[this.page]],
                         components: [this._actionRow],
                     });
