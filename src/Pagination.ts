@@ -23,7 +23,7 @@ class Pagination {
             label: "Back",
             style: "SECONDARY",
         },
-        timeout: 3000,
+        timeout: 30000, //30 seconds
     };
 
     /**
