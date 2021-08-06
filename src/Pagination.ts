@@ -1,7 +1,6 @@
 /**
  * Main Pagination file
  * 
- * Main module
  * @module Pagination
  */
 import { Client, MessageEmbed, MessageActionRow, MessageButton, TextChannel, DMChannel, Snowflake } from "discord.js";
