@@ -4,8 +4,6 @@
 
 Main Pagination file
 
-Main module
-
 ## Table of contents
 
 ### Classes

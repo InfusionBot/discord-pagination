@@ -4,6 +4,8 @@
 
 [types](../modules/types.md).PaginationOptions
 
+Options for Pagination class
+
 ## Table of contents
 
 ### Properties
@@ -18,16 +20,18 @@
 
 • **backBtn**: `Object`
 
+Back Button options
+
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `label` | `string` |
-| `style` | `MessageButtonStyleResolvable` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `label` | `string` | Label for the button, default: Back |
+| `style` | `MessageButtonStyleResolvable` | One of [MessageButtonStyleResolvable](https://discord.js.org/#/docs/main/master/typedef/MessageButtonStyleResolvable), default: SECONDARY |
 
 #### Defined in
 
-[types.ts:8](https://github.com/Welcome-Bot/discord-pagination/blob/57dc58a/src/types.ts#L8)
+[types.ts:13](https://github.com/Welcome-Bot/discord-pagination/blob/11926de/src/types.ts#L13)
 
 ___
 
@@ -35,16 +39,18 @@ ___
 
 • **nextBtn**: `Object`
 
+Next Button options
+
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `label` | `string` |
-| `style` | `MessageButtonStyleResolvable` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `label` | `string` | Label for the button, default: Next |
+| `style` | `MessageButtonStyleResolvable` | One of [MessageButtonStyleResolvable](https://discord.js.org/#/docs/main/master/typedef/MessageButtonStyleResolvable), default: PRIMARY |
 
 #### Defined in
 
-[types.ts:4](https://github.com/Welcome-Bot/discord-pagination/blob/57dc58a/src/types.ts#L4)
+[types.ts:6](https://github.com/Welcome-Bot/discord-pagination/blob/11926de/src/types.ts#L6)
 
 ___
 
@@ -52,6 +58,8 @@ ___
 
 • **timeout**: `number`
 
+Time in milliseconds after which buttons are disabled, default: 30000 (30 seconds)
+
 #### Defined in
 
-[types.ts:12](https://github.com/Welcome-Bot/discord-pagination/blob/57dc58a/src/types.ts#L12)
+[types.ts:20](https://github.com/Welcome-Bot/discord-pagination/blob/11926de/src/types.ts#L20)
