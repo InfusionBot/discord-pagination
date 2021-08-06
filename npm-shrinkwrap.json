@@ -312,9 +312,10 @@
       }
     },
     "node_modules/@types/node": {
-      "version": "16.4.10",
-      "dev": true,
-      "license": "MIT"
+      "version": "16.4.12",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-16.4.12.tgz",
+      "integrity": "sha512-zxrTNFl9Z8boMJXs6ieqZP0wAhvkdzmHSxTlJabM16cf5G9xBc1uPRH5Bbv2omEDDiM8MzTfqTJXBf0Ba4xFWA==",
+      "dev": true
     },
     "node_modules/@types/responselike": {
       "version": "1.0.0",
@@ -1663,9 +1664,10 @@
       }
     },
     "node_modules/discord.js": {
-      "version": "13.0.0-dev.t1627992462.35fa3b3",
+      "version": "13.0.0-dev.t1628165339.3eb4140",
+      "resolved": "https://registry.npmjs.org/discord.js/-/discord.js-13.0.0-dev.t1628165339.3eb4140.tgz",
+      "integrity": "sha512-0bQliOWtUaQwoUCbk0lheZv/80re7Sge4L5I2nPhr4SarhiWN9JGcR3ijWu1moC09qHBeuGXpinDDuLZTSkXKA==",
       "dev": true,
-      "license": "Apache-2.0",
       "dependencies": {
         "@discordjs/builders": "^0.3.0",
         "@discordjs/collection": "^0.2.1",
@@ -7188,7 +7190,9 @@
       }
     },
     "@types/node": {
-      "version": "16.4.10",
+      "version": "16.4.12",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-16.4.12.tgz",
+      "integrity": "sha512-zxrTNFl9Z8boMJXs6ieqZP0wAhvkdzmHSxTlJabM16cf5G9xBc1uPRH5Bbv2omEDDiM8MzTfqTJXBf0Ba4xFWA==",
       "dev": true
     },
     "@types/responselike": {
@@ -8041,7 +8045,9 @@
       "dev": true
     },
     "discord.js": {
-      "version": "13.0.0-dev.t1627992462.35fa3b3",
+      "version": "13.0.0-dev.t1628165339.3eb4140",
+      "resolved": "https://registry.npmjs.org/discord.js/-/discord.js-13.0.0-dev.t1628165339.3eb4140.tgz",
+      "integrity": "sha512-0bQliOWtUaQwoUCbk0lheZv/80re7Sge4L5I2nPhr4SarhiWN9JGcR3ijWu1moC09qHBeuGXpinDDuLZTSkXKA==",
       "dev": true,
       "requires": {
         "@discordjs/builders": "^0.3.0",
