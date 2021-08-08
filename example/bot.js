@@ -35,9 +35,8 @@ client.on("interactionCreate", async (interaction) => {
         pages[1].setDescription("My General commands\n```\n• help - Shows all commands!\n• ping - Shows my ping!\n• server - Show server's name\n```");
         const pagination = new Pagination(client);
         pagination.setPages(pages);
-        pagination.setChannel(interaction.channel);
         pagination.setAuthorizedUsers([interaction.user.id]);
-        pagination.send();
+        pagination.send(interaction);
     } else if (cmd === "ping") {
         await interaction.reply("Pong!");
     } else if (cmd === "server") {
