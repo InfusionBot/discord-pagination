@@ -3,7 +3,7 @@
  * 
  * @module Pagination
  */
-import { Client, MessageEmbed, MessageActionRow, MessageButton, Message, Interaction, Snowflake } from "discord.js";
+import { Client, MessageEmbed, MessageActionRow, MessageButton, Message, CommandInteraction, Snowflake } from "discord.js";
 import { PaginationOptions } from "./types";
 
 /** Pagination class */
@@ -137,7 +137,7 @@ class Pagination {
      * Send the embed
      * @return {boolen}
      */
-    public send(messageOrInteraction: Message | Interaction) {
+    public send(messageOrInteraction: Message | CommandInteraction) {
         if (!this.pages) throw new Error("Pages not set");
         if (!this.authorizedUsers) throw new Error("Authorized Users not set");
         messageOrInteraction.reply({
