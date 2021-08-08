@@ -9,6 +9,14 @@ client.on("ready", async () => {
         {
             name: "help",
             description: "Shows all commands!"
+        },
+        {
+            name: "ping",
+            description: "Shows my ping!"
+        },
+        {
+            name: "server",
+            description: "Show server's name"
         }
     ]);
 });
@@ -16,19 +24,24 @@ client.on("error", console.error);
 client.on("warn", console.warn);
 client.on("interactionCreate", async (interaction) => {
     if (!interaction.isCommand()) return;
+    const { commandName: cmd } = interaction;
 
-    if (interaction.commandName === "help") {
+    if (cmd === "help") {
         const pages = [
             (new MessageEmbed).setTitle("Page 1"),
             (new MessageEmbed).setTitle("Page 2"),
         ];
         pages[0].setDescription("To see my commands, go to the next page using buttons.");
-        pages[1].setDescription("My General commands\n```\n• help - Shows all commands!\n• kick - Kick someone\n• ban - Ban someone\n• unban - Unban someone\n```");
+        pages[1].setDescription("My General commands\n```\n• help - Shows all commands!\n• ping - Shows my ping!\n• server - Show server's name\n```");
         const pagination = new Pagination(client);
         pagination.setPages(pages);
         pagination.setChannel(interaction.channel);
         pagination.setAuthorizedUsers([interaction.user.id]);
         pagination.send();
+    } else if (cmd === "ping") {
+        await interaction.reply("Pong!");
+    } else if (cmd === "server") {
+        await interaction.reply(`This server's name is ${interaction.guild.name}`);
     }
 });
 client.login("TOKEN");
