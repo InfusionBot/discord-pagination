@@ -3,7 +3,7 @@
  * 
  * @module Pagination
  */
-import { Client, MessageEmbed, MessageActionRow, MessageButton, TextChannel, DMChannel, Snowflake } from "discord.js";
+import { Client, MessageEmbed, MessageActionRow, MessageButton, Message, Interaction, Snowflake } from "discord.js";
 import { PaginationOptions } from "./types";
 
 /** Pagination class */
@@ -54,12 +54,6 @@ class Pagination {
      * @type {Array<MessageEmbed>}
      */
     public pages: Array<MessageEmbed>;
-
-    /**
-     * Text channel to send embed
-     * @type {TextChannel | DMChannel}
-     */
-    public channel: TextChannel | DMChannel;
 
     /**
      * Authorized Users
@@ -130,17 +124,6 @@ class Pagination {
     }
 
     /**
-     * Set the channel where the embed should be sent
-     * @param channel - A TextChannel
-     * @return {boolen}
-     */
-    public setChannel(channel: TextChannel | DMChannel) {
-        if (!channel.isText()) throw new TypeError("Pagination.setChannel() requires channel to be an text channel (instance of TextChannel or DMChannel)");
-        this.channel = channel;
-        return true;
-    }
-
-    /**
      * Set an array of user IDs who can switch pages
      * @param users - A array of user IDs
      * @return {boolen}
@@ -154,11 +137,10 @@ class Pagination {
      * Send the embed
      * @return {boolen}
      */
-    public send() {
-        if (!this.channel) throw new Error("Channel not set");
+    public send(messageOrInteraction: Message | Interaction) {
         if (!this.pages) throw new Error("Pages not set");
         if (!this.authorizedUsers) throw new Error("Authorized Users not set");
-        this.channel.send({
+        messageOrInteraction.reply({
             embeds: [this.pages[this.page]],
             components: [this._actionRow],
         })
