@@ -38,9 +38,9 @@ client.on("interactionCreate", async (interaction) => {
         pagination.setAuthorizedUsers([interaction.user.id]);
         pagination.send(interaction);
     } else if (cmd === "ping") {
-        await interaction.reply("Pong!");
+        await interaction.reply(`Pong!\nMy latency: ${client.ws.ping}ms`);
     } else if (cmd === "server") {
         await interaction.reply(`This server's name is ${interaction.guild.name}`);
     }
 });
-client.login("TOKEN");
+client.login(process.env.DISCORD_TOKEN);
