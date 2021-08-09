@@ -16,6 +16,6 @@ First install using npm:
 npm install djs-pagination-buttons --save
 ```
 
-Then go ahead you can use a [example we have made for you!]()
+Then go ahead you can use a [example we have made for you!](https://github.com/Welcome-Bot/discord-pagination/blob/main/example/bot.js)
 
 Read the [docs](https://welcome-bot.github.io/discord-pagination/classes/Pagination.Pagination-1.html) if you have any issues, you may also join the Welcome-Bot support server for queries!
