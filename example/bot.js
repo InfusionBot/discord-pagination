@@ -43,4 +43,4 @@ client.on("interactionCreate", async (interaction) => {
         await interaction.reply(`This server's name is ${interaction.guild.name}`);
     }
 });
-client.login("TOKEN");
+client.login(process.env.DISCORD_TOKEN);
