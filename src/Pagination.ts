@@ -26,7 +26,7 @@ class Pagination {
         },
         backBtn: {
             label: "Back",
-            style: "SECONDARY",
+            style: "SUCCESS",
         },
         timeout: 30000, //30 seconds
     };
@@ -105,7 +105,7 @@ class Pagination {
                     break;
             }
             setTimeout(() => {
-                interaction.editReply({
+                interaction.update({
                     embeds: [this.pages[this.page]],
                     components: [this._actionRowEnd],
                 });
