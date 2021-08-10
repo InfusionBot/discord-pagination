@@ -31,7 +31,7 @@ Back Button options
 
 #### Defined in
 
-[types.ts:13](https://github.com/Welcome-Bot/discord-pagination/blob/8429fe6/src/types.ts#L13)
+[types.ts:13](https://github.com/Welcome-Bot/discord-pagination/blob/d4b47d8/src/types.ts#L13)
 
 ___
 
@@ -50,7 +50,7 @@ Next Button options
 
 #### Defined in
 
-[types.ts:6](https://github.com/Welcome-Bot/discord-pagination/blob/8429fe6/src/types.ts#L6)
+[types.ts:6](https://github.com/Welcome-Bot/discord-pagination/blob/d4b47d8/src/types.ts#L6)
 
 ___
 
@@ -62,4 +62,4 @@ Time in milliseconds after which buttons are disabled, default: 30000 (30 second
 
 #### Defined in
 
-[types.ts:20](https://github.com/Welcome-Bot/discord-pagination/blob/8429fe6/src/types.ts#L20)
+[types.ts:20](https://github.com/Welcome-Bot/discord-pagination/blob/d4b47d8/src/types.ts#L20)
