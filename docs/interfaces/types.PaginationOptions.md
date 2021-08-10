@@ -10,47 +10,32 @@ Options for Pagination class
 
 ### Properties
 
-- [backBtn](types.PaginationOptions.md#backbtn)
-- [nextBtn](types.PaginationOptions.md#nextbtn)
+- [buttons](types.PaginationOptions.md#buttons)
 - [timeout](types.PaginationOptions.md#timeout)
 
 ## Properties
 
-### backBtn
+### buttons
 
-• **backBtn**: `Object`
+• **buttons**: `Object`
 
-Back Button options
-
-#### Type declaration
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `label` | `string` | Label for the button, default: Back |
-| `style` | `MessageButtonStyleResolvable` | One of [MessageButtonStyleResolvable](https://discord.js.org/#/docs/main/master/typedef/MessageButtonStyleResolvable), default: SECONDARY |
-
-#### Defined in
-
-[types.ts:13](https://github.com/Welcome-Bot/discord-pagination/blob/2665fd9/src/types.ts#L13)
-
-___
-
-### nextBtn
-
-• **nextBtn**: `Object`
-
-Next Button options
+Options for other buttons
 
 #### Type declaration
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `label` | `string` | Label for the button, default: Next |
-| `style` | `MessageButtonStyleResolvable` | One of [MessageButtonStyleResolvable](https://discord.js.org/#/docs/main/master/typedef/MessageButtonStyleResolvable), default: PRIMARY |
+| `back` | `Object` | Back Button options |
+| `back.label` | `string` | Label for the button, default: `Back` |
+| `back.style` | `MessageButtonStyleResolvable` | One of [MessageButtonStyleResolvable](https://discord.js.org/#/docs/main/master/typedef/MessageButtonStyleResolvable), default: `SUCCESS` |
+| `next` | `Object` | Next Button options |
+| `next.label` | `string` | Label for the button, default: `Next` |
+| `next.style` | `MessageButtonStyleResolvable` | One of [MessageButtonStyleResolvable](https://discord.js.org/#/docs/main/master/typedef/MessageButtonStyleResolvable), default: `PRIMARY` |
+| `page` | `string` | A disabled button which shows current page, default: `Page {{page}} / {{total_pages}}` |
 
 #### Defined in
 
-[types.ts:6](https://github.com/Welcome-Bot/discord-pagination/blob/2665fd9/src/types.ts#L6)
+[types.ts:6](https://github.com/Welcome-Bot/discord-pagination/blob/f5b5079/src/types.ts#L6)
 
 ___
 
@@ -58,8 +43,8 @@ ___
 
 • **timeout**: `number`
 
-Time in milliseconds after which buttons are disabled, default: 30000 (30 seconds)
+Time in milliseconds after which all buttons are disabled, default: `30000` (30 seconds)
 
 #### Defined in
 
-[types.ts:20](https://github.com/Welcome-Bot/discord-pagination/blob/2665fd9/src/types.ts#L20)
+[types.ts:25](https://github.com/Welcome-Bot/discord-pagination/blob/f5b5079/src/types.ts#L25)
