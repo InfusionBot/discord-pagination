@@ -7,7 +7,7 @@ client.on("ready", async () => {
     console.log("Bot is online!");
     await client.application.commands.set([
         {
-            name: "help",
+            name: "commands",
             description: "Shows all commands!"
         },
         {
@@ -26,13 +26,13 @@ client.on("interactionCreate", async (interaction) => {
     if (!interaction.isCommand()) return;
     const { commandName: cmd } = interaction;
 
-    if (cmd === "help") {
+    if (cmd === "commands") {
         const pages = [
             (new MessageEmbed).setTitle("Page 1"),
             (new MessageEmbed).setTitle("Page 2"),
         ];
         pages[0].setDescription("To see my commands, go to the next page using buttons.");
-        pages[1].setDescription("My General commands\n```\n• help - Shows all commands!\n• ping - Shows my ping!\n• server - Show server's name\n```");
+        pages[1].setDescription("My General commands\n```\n• commands - Shows all commands!\n• ping - Shows my ping!\n• server - Show server's name\n```");
         const pagination = new Pagination(client);
         pagination.setPages(pages);
         pagination.setAuthorizedUsers([interaction.user.id]);
