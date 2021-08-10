@@ -84,7 +84,7 @@ class Pagination {
             .setDisabled(true);
         this._actionRow.addComponents(
             backButton,
-            pageButton
+            pageButton,
             nextButton,
         );
         this.client.on("interactionCreate", (interaction: any) => {
