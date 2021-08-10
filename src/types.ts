@@ -5,7 +5,7 @@ export interface PaginationOptions {
     /** Options for other buttons */
     buttons: {
         /** Back Button options */
-        backBtn: {
+        back: {
             /** Label for the button, default: `Back` */
             label: string;
             /** One of [MessageButtonStyleResolvable](https://discord.js.org/#/docs/main/master/typedef/MessageButtonStyleResolvable), default: `SUCCESS` */

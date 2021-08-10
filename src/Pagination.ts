@@ -92,7 +92,10 @@ class Pagination {
             const ids = ["nextBtn", "backBtn"];
             const filter = (i: any) => (ids.includes(i.customId) && this.authorizedUsers.includes(i.user.id));
             if (!(filter(interaction))) return;
-            let handlePage = () => this._actionRow.components[1].setLabel(this._getPageLabel()); //Update page label
+            let handlePage = () => {
+                if (this._actionRow.components[1] instanceof MessageButton)
+                    this._actionRow.components[1].setLabel(this._getPageLabel());
+            }; //Update page label
             handlePage = handlePage.bind(this);
             switch (interaction.customId) {
                 case "nextBtn":
@@ -113,7 +116,7 @@ class Pagination {
                     break;
             }
             setTimeout(async () => {
-                for (const i = 0; i < this._actionRow.components.length; i++) {
+                for (let i = 0; i < this._actionRow.components.length; i++) {
                     this._actionRow.components[i].setDisabled(true);
                 }
                 handlePage();
