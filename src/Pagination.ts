@@ -133,7 +133,7 @@ class Pagination {
      * @private
      */
     private _getPageLabel() {
-        return this.options.nextBtn.label
+        return this.options.buttons.page
             .replace("{{page}}", `${this.page}`)
             .replace("{{total_pages}}", `${this.pages.length}`);
     }
