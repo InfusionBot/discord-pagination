@@ -20,13 +20,16 @@ class Pagination {
      * @private
      */
     private options: PaginationOptions = {
-        nextBtn: {
-            label: "Next",
-            style: "PRIMARY",
-        },
-        backBtn: {
-            label: "Back",
-            style: "SUCCESS",
+        buttons: {
+            backBtn: {
+                label: "Back",
+                style: "SUCCESS",
+            },
+            next: {
+                label: "Next",
+                style: "PRIMARY",
+            },
+            page: "Page {{page}} / {{total_pages}}",
         },
         timeout: 30000, //30 seconds
     };
@@ -66,31 +69,35 @@ class Pagination {
         this.options = Object.assign(this.options, options);
         this.page = 0;
         this._actionRow = new MessageActionRow();
-        this._actionRowEnd = new MessageActionRow();
-        const nextButton = new MessageButton()
-            .setLabel(this.options.nextBtn.label)
-            .setStyle(this.options.nextBtn.style)
-            .setCustomId("nextBtn");
         const backButton = new MessageButton()
             .setLabel(this.options.backBtn.label)
             .setStyle(this.options.backBtn.style)
             .setCustomId("backBtn");
+        const pageButton = new MessageButton()
+            .setLabel(this._getPageLabel())
+            .setStyle("SECONDARY")
+            .setCustomId("pageBtn");
+        const nextButton = new MessageButton()
+            .setLabel(this.options.buttons.next.label)
+            .setStyle(this.options.buttons.next.style)
+            .setCustomId("nextBtn")
+            .setDisabled(true);
         this._actionRow.addComponents(
-            nextButton,
             backButton,
-        );
-        this._actionRowEnd.addComponents(
-            nextButton.setDisabled(true),
-            backButton.setDisabled(true),
+            pageButton
+            nextButton,
         );
         this.client.on("interactionCreate", (interaction: any) => {
             if (!interaction.isButton()) return;
             const ids = ["nextBtn", "backBtn"];
             const filter = (i: any) => (ids.includes(i.customId) && this.authorizedUsers.includes(i.user.id));
             if (!(filter(interaction))) return;
+            let handlePage = () => this._actionRow.components[1].setLabel(this._getPageLabel()); //Update page label
+            handlePage = handlePage.bind(this);
             switch (interaction.customId) {
                 case "nextBtn":
                     this.page = this.page + 1 < this.pages.length ? ++this.page : 0;
+                    handlePage();
                     interaction.update({
                         embeds: [this.pages[this.page]],
                         components: [this._actionRow],
@@ -98,19 +105,34 @@ class Pagination {
                     break;
                 case "backBtn":
                     this.page = this.page > 0 ? --this.page : this.pages.length - 1;
+                    handlePage();
                     interaction.update({
                         embeds: [this.pages[this.page]],
                         components: [this._actionRow],
                     });
                     break;
             }
-            setTimeout(() => {
-                interaction.update({
+            setTimeout(async () => {
+                for (const i = 0; i < this._actionRow.components.length; i++) {
+                    this._actionRow.components[i].setDisabled(true);
+                }
+                handlePage();
+                await interaction.update({
                     embeds: [this.pages[this.page]],
-                    components: [this._actionRowEnd],
+                    components: [this._actionRow],
                 });
             }, this.options.timeout);
         });
+    }
+
+    /**
+     * Get page label
+     * @private
+     */
+    private _getPageLabel() {
+        return this.options.nextBtn.label
+            .replace("{{page}}", `${this.page}`)
+            .replace("{{total_pages}}", `${this.pages.length}`);
     }
 
     /**
