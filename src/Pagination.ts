@@ -21,7 +21,7 @@ class Pagination {
      */
     private options: PaginationOptions = {
         buttons: {
-            backBtn: {
+            back: {
                 label: "Back",
                 style: "SUCCESS",
             },
@@ -70,8 +70,8 @@ class Pagination {
         this.page = 0;
         this._actionRow = new MessageActionRow();
         const backButton = new MessageButton()
-            .setLabel(this.options.backBtn.label)
-            .setStyle(this.options.backBtn.style)
+            .setLabel(this.options.buttons.back.label)
+            .setStyle(this.options.buttons.back.style)
             .setCustomId("backBtn");
         const pageButton = new MessageButton()
             .setLabel(this._getPageLabel())
