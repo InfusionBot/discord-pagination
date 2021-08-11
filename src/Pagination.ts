@@ -68,25 +68,6 @@ class Pagination {
         this.client = client;
         this.options = Object.assign(this.options, options);
         this.page = 0;
-        this._actionRow = new MessageActionRow();
-        const backButton = new MessageButton()
-            .setLabel(this.options.buttons.back.label)
-            .setStyle(this.options.buttons.back.style)
-            .setCustomId("backBtn");
-        const pageButton = new MessageButton()
-            .setLabel(this._getPageLabel())
-            .setStyle("SECONDARY")
-            .setCustomId("pageBtn");
-        const nextButton = new MessageButton()
-            .setLabel(this.options.buttons.next.label)
-            .setStyle(this.options.buttons.next.style)
-            .setCustomId("nextBtn")
-            .setDisabled(true);
-        this._actionRow.addComponents(
-            backButton,
-            pageButton,
-            nextButton,
-        );
         this.client.on("interactionCreate", (interaction: any) => {
             if (!interaction.isButton()) return;
             const ids = ["nextBtn", "backBtn"];
@@ -133,9 +114,10 @@ class Pagination {
      * @private
      */
     private _getPageLabel() {
-        return this.options.buttons.page
+        const label = this.options.buttons.page
             .replace("{{page}}", `${this.page}`)
             .replace("{{total_pages}}", `${this.pages.length}`);
+        return label;
     }
 
     /**
@@ -165,6 +147,25 @@ class Pagination {
     public send(messageOrInteraction: Message | CommandInteraction) {
         if (!this.pages) throw new Error("Pages not set");
         if (!this.authorizedUsers) throw new Error("Authorized Users not set");
+        this._actionRow = new MessageActionRow();
+        const backButton = new MessageButton()
+            .setLabel(this.options.buttons.back.label)
+            .setStyle(this.options.buttons.back.style)
+            .setCustomId("backBtn");
+        const pageButton = new MessageButton()
+            .setLabel(this._getPageLabel())
+            .setStyle("SECONDARY")
+            .setCustomId("pageBtn");
+        const nextButton = new MessageButton()
+            .setLabel(this.options.buttons.next.label)
+            .setStyle(this.options.buttons.next.style)
+            .setCustomId("nextBtn")
+            .setDisabled(true);
+        this._actionRow.addComponents(
+            backButton,
+            pageButton,
+            nextButton,
+        );
         messageOrInteraction.reply({
             embeds: [this.pages[this.page]],
             components: [this._actionRow],
