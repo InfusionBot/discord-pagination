@@ -53,6 +53,10 @@ The displayed date is in the format `DD-MM-YYYY`
 
 ### Initial release
 
+[v0.2.0]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.2.0
+[v0.1.4]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.1.4
+[v0.1.3]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.1.3
+[v0.1.2]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.1.2
 [v0.1.1]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.1.1
 
 ## Older changelogs
