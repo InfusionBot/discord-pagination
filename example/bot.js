@@ -41,7 +41,7 @@ client.on("interactionCreate", async (interaction) => {
         const pagination = new Pagination(client);
         pagination.setPages(pages);
         pagination.setAuthorizedUsers([interaction.user.id]);
-        pagination.send(interaction);
+        pagination.send(null, interaction);
     } else if (cmd === "ping") {
         await interaction.reply(`Pong!\nMy latency: ${client.ws.ping}ms`);
     } else if (cmd === "server") {
