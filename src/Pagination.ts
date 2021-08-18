@@ -3,7 +3,7 @@
  * 
  * @module Pagination
  */
-import { Client, MessageEmbed, MessageActionRow, MessageButton, Message, CommandInteraction, Snowflake } from "discord.js";
+import { Client, MessageEmbed, MessageActionRow, MessageButton, TextChannel, CommandInteraction, Snowflake } from "discord.js";
 import { PaginationOptions } from "./types";
 
 /** Pagination class */
@@ -166,13 +166,15 @@ class Pagination {
 
     /**
      * Send the embed
+     * @param channel - If you want to send it to a channel instead of repling to interaction, give the channel here
+     * @param interaction - If you are not providing channel, set channel to false and provide a command interaction here
      * @return {boolen}
      */
-    public send(message: Message, interaction: CommandInteraction) {
+    public send(channel: TextChannel, interaction: CommandInteraction) {
         if (!this.pages) throw new Error("Pages not set");
         if (!this.authorizedUsers) throw new Error("Authorized Users not set");
-        if (!message && !interaction) {
-            throw new Error("You should either provide message or interaction, set message to false if you are providing interaction");
+        if (!channel && !interaction) {
+            throw new Error("You should either provide channel or interaction, set channel to false if you are providing interaction");
         }
         if (interaction) interaction.deferReply();
         this._actionRow = new MessageActionRow();
@@ -193,8 +195,8 @@ class Pagination {
             pageButton,
             nextButton,
         );
-        if (message)
-            message.reply({
+        if (channel)
+            channel.send({
                 embeds: [this.pages[this.page]],
                 components: [this._actionRow],
             });
