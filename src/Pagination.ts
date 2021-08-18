@@ -122,7 +122,7 @@ class Pagination {
      * https://stackoverflow.com/a/1349426
      * @private
      */
-    private _generateString(length) {
+    private _generateString(length: Number) {
         let result           = "";
         const characters       = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         const charactersLength = characters.length;
@@ -168,9 +168,13 @@ class Pagination {
      * Send the embed
      * @return {boolen}
      */
-    public send(messageOrInteraction: Message | CommandInteraction) {
+    public send(message: Message, interaction: CommandInteraction) {
         if (!this.pages) throw new Error("Pages not set");
         if (!this.authorizedUsers) throw new Error("Authorized Users not set");
+        if (!message && !interaction) {
+            throw new Error("You should either provide message or interaction, set message to false if you are providing interaction");
+        }
+        if (interaction) interaction.deferReply();
         this._actionRow = new MessageActionRow();
         const backButton = new MessageButton()
             .setLabel(this.options.buttons.back.label)
@@ -183,19 +187,22 @@ class Pagination {
         const nextButton = new MessageButton()
             .setLabel(this.options.buttons.next.label)
             .setStyle(this.options.buttons.next.style)
-            .setCustomId(`next-${this._key}`)
-            .setDisabled(true);
+            .setCustomId(`next-${this._key}`);
         this._actionRow.addComponents(
             backButton,
             pageButton,
             nextButton,
         );
-        messageOrInteraction.reply({
-            embeds: [this.pages[this.page]],
-            components: [this._actionRow],
-        })
-            .then((msg: any) => {return msg;})
-            .catch(console.error);
+        if (message)
+            message.reply({
+                embeds: [this.pages[this.page]],
+                components: [this._actionRow],
+            });
+        else if (interaction)
+            interaction.editReply({
+                embeds: [this.pages[this.page]],
+                components: [this._actionRow],
+            });
         return true;
     }
 }
