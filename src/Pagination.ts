@@ -170,13 +170,13 @@ class Pagination {
      * @param interaction - If you are not providing channel, set channel to false and provide a command interaction here
      * @return {boolen}
      */
-    public send(channel: TextChannel, interaction: CommandInteraction) {
+    public async send(channel: TextChannel, interaction: CommandInteraction) {
         if (!this.pages) throw new Error("Pages not set");
         if (!this.authorizedUsers) throw new Error("Authorized Users not set");
-        if (!channel && !interaction) {
-            throw new Error("You should either provide channel or interaction, set channel to false if you are providing interaction");
+        if (!channel && !(interaction && interaction?.isCommand?.())) {
+            throw new Error("You should either provide channel or command interaction, set channel to false if you are providing interaction");
         }
-        if (interaction) interaction.deferReply();
+        if (interaction) await interaction.deferReply();
         this._actionRow = new MessageActionRow();
         const backButton = new MessageButton()
             .setLabel(this.options.buttons.back.label)
@@ -185,7 +185,8 @@ class Pagination {
         const pageButton = new MessageButton()
             .setLabel(this._getPageLabel())
             .setStyle("SECONDARY")
-            .setCustomId(`page-${this._key}`);
+            .setCustomId(`page-${this._key}`)
+            .setDisabled(true);
         const nextButton = new MessageButton()
             .setLabel(this.options.buttons.next.label)
             .setStyle(this.options.buttons.next.style)
@@ -201,7 +202,7 @@ class Pagination {
                 components: [this._actionRow],
             });
         else if (interaction)
-            interaction.editReply({
+            interaction.followUp({
                 embeds: [this.pages[this.page]],
                 components: [this._actionRow],
             });
