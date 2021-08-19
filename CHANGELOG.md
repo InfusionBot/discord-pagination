@@ -13,6 +13,7 @@ The displayed date is in the format `DD-MM-YYYY`
 ### Bug fixes
 
 - fix(Pagination): fix bug related to interactions. Only defer reply if not replied or deferred already
+- fix(Pagination): like when you provide button options, if you didn't provide either `back` or `next` or `page`. Then it would throw an error `Cannot read property 'label' of undefined`
 
 ## [v0.2.0]
 
