@@ -3,7 +3,7 @@
  * 
  * @module Pagination
  */
-import { Client, MessageEmbed, MessageActionRow, MessageButton, Message, CommandInteraction, Snowflake } from "discord.js";
+import { Client, MessageEmbed, MessageActionRow, MessageButton, TextChannel, CommandInteraction, Snowflake } from "discord.js";
 import { PaginationOptions } from "./types";
 
 /** Pagination class */
@@ -33,6 +33,13 @@ class Pagination {
         },
         timeout: 30000, //30 seconds
     };
+
+    /**
+     * Unique key for those buttons
+     * @type {string}
+     * @private
+     */
+    private _key: string;
 
     /**
      * The page number
@@ -68,28 +75,10 @@ class Pagination {
         this.client = client;
         this.options = Object.assign(this.options, options);
         this.page = 0;
-        this._actionRow = new MessageActionRow();
-        const backButton = new MessageButton()
-            .setLabel(this.options.buttons.back.label)
-            .setStyle(this.options.buttons.back.style)
-            .setCustomId("backBtn");
-        const pageButton = new MessageButton()
-            .setLabel(this._getPageLabel())
-            .setStyle("SECONDARY")
-            .setCustomId("pageBtn");
-        const nextButton = new MessageButton()
-            .setLabel(this.options.buttons.next.label)
-            .setStyle(this.options.buttons.next.style)
-            .setCustomId("nextBtn")
-            .setDisabled(true);
-        this._actionRow.addComponents(
-            backButton,
-            pageButton,
-            nextButton,
-        );
+        this._key = this._generateString(5);
         this.client.on("interactionCreate", (interaction: any) => {
             if (!interaction.isButton()) return;
-            const ids = ["nextBtn", "backBtn"];
+            const ids = [`next-${this._key}`, `back-${this._key}`];
             const filter = (i: any) => (ids.includes(i.customId) && this.authorizedUsers.includes(i.user.id));
             if (!(filter(interaction))) return;
             let handlePage = () => {
@@ -98,7 +87,7 @@ class Pagination {
             }; //Update page label
             handlePage = handlePage.bind(this);
             switch (interaction.customId) {
-                case "nextBtn":
+                case `next-${this._key}`:
                     this.page = this.page + 1 < this.pages.length ? ++this.page : 0;
                     handlePage();
                     interaction.update({
@@ -106,7 +95,7 @@ class Pagination {
                         components: [this._actionRow],
                     });
                     break;
-                case "backBtn":
+                case `back-${this._key}`:
                     this.page = this.page > 0 ? --this.page : this.pages.length - 1;
                     handlePage();
                     interaction.update({
@@ -129,13 +118,30 @@ class Pagination {
     }
 
     /**
+     * Generate random string
+     * https://stackoverflow.com/a/1349426
+     * @private
+     */
+    private _generateString(length: Number) {
+        let result           = "";
+        const characters       = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * 
+ charactersLength));
+        }
+        return result;
+    }
+
+    /**
      * Get page label
      * @private
      */
     private _getPageLabel() {
-        return this.options.buttons.page
+        const label = this.options.buttons.page
             .replace("{{page}}", `${this.page}`)
             .replace("{{total_pages}}", `${this.pages.length}`);
+        return label;
     }
 
     /**
@@ -160,17 +166,46 @@ class Pagination {
 
     /**
      * Send the embed
+     * @param channel - If you want to send it to a channel instead of repling to interaction, give the channel here
+     * @param interaction - If you are not providing channel, set channel to false and provide a command interaction here
      * @return {boolen}
      */
-    public send(messageOrInteraction: Message | CommandInteraction) {
+    public async send(channel: TextChannel, interaction: CommandInteraction) {
         if (!this.pages) throw new Error("Pages not set");
         if (!this.authorizedUsers) throw new Error("Authorized Users not set");
-        messageOrInteraction.reply({
-            embeds: [this.pages[this.page]],
-            components: [this._actionRow],
-        })
-            .then((msg: any) => {return msg;})
-            .catch(console.error);
+        if (!channel && !(interaction && interaction?.isCommand?.())) {
+            throw new Error("You should either provide channel or command interaction, set channel to false if you are providing interaction");
+        }
+        if (interaction) await interaction.deferReply();
+        this._actionRow = new MessageActionRow();
+        const backButton = new MessageButton()
+            .setLabel(this.options.buttons.back.label)
+            .setStyle(this.options.buttons.back.style)
+            .setCustomId(`back-${this._key}`);
+        const pageButton = new MessageButton()
+            .setLabel(this._getPageLabel())
+            .setStyle("SECONDARY")
+            .setCustomId(`page-${this._key}`)
+            .setDisabled(true);
+        const nextButton = new MessageButton()
+            .setLabel(this.options.buttons.next.label)
+            .setStyle(this.options.buttons.next.style)
+            .setCustomId(`next-${this._key}`);
+        this._actionRow.addComponents(
+            backButton,
+            pageButton,
+            nextButton,
+        );
+        if (channel)
+            channel.send({
+                embeds: [this.pages[this.page]],
+                components: [this._actionRow],
+            });
+        else if (interaction)
+            interaction.followUp({
+                embeds: [this.pages[this.page]],
+                components: [this._actionRow],
+            });
         return true;
     }
 }

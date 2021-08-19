@@ -16,6 +16,7 @@ Pagination class
 
 - [\_actionRow](Pagination.Pagination-1.md#_actionrow)
 - [\_actionRowEnd](Pagination.Pagination-1.md#_actionrowend)
+- [\_key](Pagination.Pagination-1.md#_key)
 - [authorizedUsers](Pagination.Pagination-1.md#authorizedusers)
 - [client](Pagination.Pagination-1.md#client)
 - [options](Pagination.Pagination-1.md#options)
@@ -24,6 +25,7 @@ Pagination class
 
 ### Methods
 
+- [\_generateString](Pagination.Pagination-1.md#_generatestring)
 - [\_getPageLabel](Pagination.Pagination-1.md#_getpagelabel)
 - [send](Pagination.Pagination-1.md#send)
 - [setAuthorizedUsers](Pagination.Pagination-1.md#setauthorizedusers)
@@ -44,7 +46,7 @@ Pagination class
 
 #### Defined in
 
-[Pagination.ts:67](https://github.com/Welcome-Bot/discord-pagination/blob/a6a7051/src/Pagination.ts#L67)
+[Pagination.ts:74](https://github.com/Welcome-Bot/discord-pagination/blob/5bbba69/src/Pagination.ts#L74)
 
 ## Properties
 
@@ -56,7 +58,7 @@ The the action row which will contain the buttons
 
 #### Defined in
 
-[Pagination.ts:48](https://github.com/Welcome-Bot/discord-pagination/blob/a6a7051/src/Pagination.ts#L48)
+[Pagination.ts:55](https://github.com/Welcome-Bot/discord-pagination/blob/5bbba69/src/Pagination.ts#L55)
 
 ___
 
@@ -68,7 +70,19 @@ The same _actionRow but with all buttons disabled
 
 #### Defined in
 
-[Pagination.ts:53](https://github.com/Welcome-Bot/discord-pagination/blob/a6a7051/src/Pagination.ts#L53)
+[Pagination.ts:60](https://github.com/Welcome-Bot/discord-pagination/blob/5bbba69/src/Pagination.ts#L60)
+
+___
+
+### \_key
+
+• `Private` **\_key**: `string`
+
+Unique key for those buttons
+
+#### Defined in
+
+[Pagination.ts:42](https://github.com/Welcome-Bot/discord-pagination/blob/5bbba69/src/Pagination.ts#L42)
 
 ___
 
@@ -80,7 +94,7 @@ Authorized Users
 
 #### Defined in
 
-[Pagination.ts:65](https://github.com/Welcome-Bot/discord-pagination/blob/a6a7051/src/Pagination.ts#L65)
+[Pagination.ts:72](https://github.com/Welcome-Bot/discord-pagination/blob/5bbba69/src/Pagination.ts#L72)
 
 ___
 
@@ -92,7 +106,7 @@ The discord.js Client
 
 #### Defined in
 
-[Pagination.ts:15](https://github.com/Welcome-Bot/discord-pagination/blob/a6a7051/src/Pagination.ts#L15)
+[Pagination.ts:15](https://github.com/Welcome-Bot/discord-pagination/blob/5bbba69/src/Pagination.ts#L15)
 
 ___
 
@@ -104,7 +118,7 @@ Pagination Options
 
 #### Defined in
 
-[Pagination.ts:22](https://github.com/Welcome-Bot/discord-pagination/blob/a6a7051/src/Pagination.ts#L22)
+[Pagination.ts:22](https://github.com/Welcome-Bot/discord-pagination/blob/5bbba69/src/Pagination.ts#L22)
 
 ___
 
@@ -116,7 +130,7 @@ The page number
 
 #### Defined in
 
-[Pagination.ts:41](https://github.com/Welcome-Bot/discord-pagination/blob/a6a7051/src/Pagination.ts#L41)
+[Pagination.ts:48](https://github.com/Welcome-Bot/discord-pagination/blob/5bbba69/src/Pagination.ts#L48)
 
 ___
 
@@ -128,9 +142,32 @@ Pages
 
 #### Defined in
 
-[Pagination.ts:59](https://github.com/Welcome-Bot/discord-pagination/blob/a6a7051/src/Pagination.ts#L59)
+[Pagination.ts:66](https://github.com/Welcome-Bot/discord-pagination/blob/5bbba69/src/Pagination.ts#L66)
 
 ## Methods
+
+### \_generateString
+
+▸ `Private` **_generateString**(`length`): `string`
+
+Generate random string
+https://stackoverflow.com/a/1349426
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `length` | `Number` |
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[Pagination.ts:125](https://github.com/Welcome-Bot/discord-pagination/blob/5bbba69/src/Pagination.ts#L125)
+
+___
 
 ### \_getPageLabel
 
@@ -144,29 +181,30 @@ Get page label
 
 #### Defined in
 
-[Pagination.ts:135](https://github.com/Welcome-Bot/discord-pagination/blob/a6a7051/src/Pagination.ts#L135)
+[Pagination.ts:140](https://github.com/Welcome-Bot/discord-pagination/blob/5bbba69/src/Pagination.ts#L140)
 
 ___
 
 ### send
 
-▸ **send**(`messageOrInteraction`): `boolean`
+▸ **send**(`channel`, `interaction`): `Promise`<`boolean`\>
 
 Send the embed
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `messageOrInteraction` | `Message` \| `CommandInteraction` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `channel` | `TextChannel` | If you want to send it to a channel instead of repling to interaction, give the channel here |
+| `interaction` | `CommandInteraction` | If you are not providing channel, set channel to false and provide a command interaction here |
 
 #### Returns
 
-`boolean`
+`Promise`<`boolean`\>
 
 #### Defined in
 
-[Pagination.ts:165](https://github.com/Welcome-Bot/discord-pagination/blob/a6a7051/src/Pagination.ts#L165)
+[Pagination.ts:173](https://github.com/Welcome-Bot/discord-pagination/blob/5bbba69/src/Pagination.ts#L173)
 
 ___
 
@@ -188,7 +226,7 @@ Set an array of user IDs who can switch pages
 
 #### Defined in
 
-[Pagination.ts:156](https://github.com/Welcome-Bot/discord-pagination/blob/a6a7051/src/Pagination.ts#L156)
+[Pagination.ts:162](https://github.com/Welcome-Bot/discord-pagination/blob/5bbba69/src/Pagination.ts#L162)
 
 ___
 
@@ -210,4 +248,4 @@ Set Array of pages to paginate
 
 #### Defined in
 
-[Pagination.ts:146](https://github.com/Welcome-Bot/discord-pagination/blob/a6a7051/src/Pagination.ts#L146)
+[Pagination.ts:152](https://github.com/Welcome-Bot/discord-pagination/blob/5bbba69/src/Pagination.ts#L152)

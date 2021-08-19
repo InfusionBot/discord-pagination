@@ -1,10 +1,17 @@
 const { Client, MessageEmbed } = require("discord.js");
-const { Pagination } = require("djs-pagination-buttons");
+require("dotenv").config();
+//const { Pagination } = require("djs-pagination-buttons");
+const { Pagination } = require("../lib/index.js");
 const client = new Client({
     intents: ["GUILD_MESSAGES", "GUILDS"],
 });
-client.on("ready", async () => {
+client.on("ready", () => {
     console.log("Bot is online!");
+});
+client.on("error", console.error);
+client.on("warn", console.warn);
+client.on("messageCreate", async (message) => {
+    if (message.content !== "!deploy") return;
     await client.application.commands.set([
         {
             name: "commands",
@@ -19,9 +26,7 @@ client.on("ready", async () => {
             description: "Show server's name"
         }
     ]);
-});
-client.on("error", console.error);
-client.on("warn", console.warn);
+})
 client.on("interactionCreate", async (interaction) => {
     if (!interaction.isCommand()) return;
     const { commandName: cmd } = interaction;
@@ -36,7 +41,7 @@ client.on("interactionCreate", async (interaction) => {
         const pagination = new Pagination(client);
         pagination.setPages(pages);
         pagination.setAuthorizedUsers([interaction.user.id]);
-        pagination.send(interaction);
+        pagination.send(null, interaction);
     } else if (cmd === "ping") {
         await interaction.reply(`Pong!\nMy latency: ${client.ws.ping}ms`);
     } else if (cmd === "server") {
