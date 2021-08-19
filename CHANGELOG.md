@@ -6,9 +6,17 @@ The displayed date is in the format `DD-MM-YYYY`
 
 [Older changelogs](#older-changelogs)
 
-## [v0.2.0]
+## [v0.3.0]
 
 > **Released:** `TBA`
+
+### New features
+
+- feat: support yarn
+
+## [v0.2.0]
+
+> **Released:** `19-08-2021`
 
 ### New features
 
