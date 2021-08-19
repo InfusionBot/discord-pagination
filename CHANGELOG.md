@@ -15,6 +15,7 @@ The displayed date is in the format `DD-MM-YYYY`
 - feat(Pagination): add a disabled button which shows current page
 - refactor(Pagination): rename `options.nextBtn` -> `options.buttons.next`
 - refactor(Pagination): rename `options.backBtn` -> `options.buttons.back`
+- To send a command interaction, now you have to `send(null, interaction)` instead of `send(interaction)`
 
 ### Changes
 
