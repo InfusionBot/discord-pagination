@@ -122,7 +122,7 @@ class Pagination {
      * https://stackoverflow.com/a/1349426
      * @private
      */
-    private _generateString(length: Number) {
+    private _generateString(length: number) {
         let result           = "";
         const characters       = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         const charactersLength = characters.length;
