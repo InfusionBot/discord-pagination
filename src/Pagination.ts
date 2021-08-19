@@ -73,6 +73,7 @@ class Pagination {
 
     constructor(client: Client, options: PaginationOptions) {
         this.client = client;
+        if (options.buttons) options.buttons = Object.assign(this.options.buttons, options.buttons);
         this.options = Object.assign(this.options, options);
         this.page = 0;
         this._key = this._generateString(5);
