@@ -6,9 +6,17 @@ The displayed date is in the format `DD-MM-YYYY`
 
 [Older changelogs](#older-changelogs)
 
-## [v0.2.0]
+## [v0.2.1]
 
 > **Released:** `TBA`
+
+### Bug fixes
+
+- fix(Pagination): fix bug related to interactions. Only defer reply if not replied or deferred already
+
+## [v0.2.0]
+
+> **Released:** `19-08-2021`
 
 ### New features
 
@@ -54,6 +62,7 @@ The displayed date is in the format `DD-MM-YYYY`
 
 ### Initial release
 
+[v0.2.1]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.2.1
 [v0.2.0]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.2.0
 [v0.1.4]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.1.4
 [v0.1.3]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.1.3
