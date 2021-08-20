@@ -25,6 +25,7 @@ The displayed date is in the format `DD-MM-YYYY`
 - refactor(Pagination): rename `options.nextBtn` -> `options.buttons.next`
 - refactor(Pagination): rename `options.backBtn` -> `options.buttons.back`
 - To send a command interaction, now you have to `send(null, interaction)` instead of `send(interaction)`
+- To send reply to normal commands, now you have to use `send(message.channel)`
 
 ### Changes
 
