@@ -94,7 +94,7 @@ class Pagination {
                     interaction.update({
                         embeds: [this.pages[this.page]],
                         components: [this._actionRow],
-                    });
+                    }).catch(() => {});
                     break;
                 case `back-${this._key}`:
                     this.page = this.page > 0 ? --this.page : this.pages.length - 1;
@@ -102,18 +102,18 @@ class Pagination {
                     interaction.update({
                         embeds: [this.pages[this.page]],
                         components: [this._actionRow],
-                    });
+                    }).catch(() => {});
                     break;
             }
             setTimeout(async () => {
+                handlePage();
                 for (let i = 0; i < this._actionRow.components.length; i++) {
                     this._actionRow.components[i].setDisabled(true);
                 }
-                handlePage();
                 await interaction.update({
                     embeds: [this.pages[this.page]],
                     components: [this._actionRow],
-                });
+                }).catch(() => {});
             }, this.options.timeout);
         });
     }
