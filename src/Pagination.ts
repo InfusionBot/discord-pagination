@@ -94,7 +94,7 @@ class Pagination {
                     interaction.update({
                         embeds: [this.pages[this.page]],
                         components: [this._actionRow],
-                    }).catch(() => {});
+                    }).catch(() => true);
                     break;
                 case `back-${this._key}`:
                     this.page = this.page > 0 ? --this.page : this.pages.length - 1;
@@ -102,7 +102,7 @@ class Pagination {
                     interaction.update({
                         embeds: [this.pages[this.page]],
                         components: [this._actionRow],
-                    }).catch(() => {});
+                    }).catch(() => true);
                     break;
             }
             setTimeout(async () => {
@@ -113,7 +113,7 @@ class Pagination {
                 await interaction.update({
                     embeds: [this.pages[this.page]],
                     components: [this._actionRow],
-                }).catch(() => {});
+                }).catch(() => true);
             }, this.options.timeout);
         });
     }
