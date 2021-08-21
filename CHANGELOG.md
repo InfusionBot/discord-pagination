@@ -6,9 +6,17 @@ The displayed date is in the format `DD-MM-YYYY`
 
 [Older changelogs](#older-changelogs)
 
-## [v0.2.1]
+## [v0.2.2]
 
 > **Released:** `TBA`
+
+### Bug fixes
+
+- fix(Pagination): suppress "unknow interaction" error. Originally took from [Siris01@002a959](https://github.com/Siris01/discord-pagination/commit/002a959b95ef1b83b94cd2825830e3d47310afc0)
+
+## [v0.2.1]
+
+> **Released:** `19-08-2021`
 
 ### Bug fixes
 
@@ -64,6 +72,7 @@ The displayed date is in the format `DD-MM-YYYY`
 
 ### Initial release
 
+[v0.2.2]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.2.2
 [v0.2.1]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.2.1
 [v0.2.0]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.2.0
 [v0.1.4]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.1.4
