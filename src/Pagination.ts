@@ -1,9 +1,21 @@
 /**
  * Main Pagination file
- * 
+ *
  * @module Pagination
  */
-import { Client, MessageEmbed, MessageActionRow, MessageButton, TextChannel, CommandInteraction, Snowflake } from "discord.js";
+import {
+    Collection,
+    Client,
+    MessageEmbed,
+    MessageActionRow,
+    MessageButton,
+    TextChannel,
+    CommandInteraction,
+    Snowflake,
+    ButtonInteraction,
+    Interaction,
+    Message,
+} from "discord.js";
 import { PaginationOptions } from "./types";
 
 /** Pagination class */
@@ -73,49 +85,14 @@ class Pagination {
 
     constructor(client: Client, options: PaginationOptions) {
         this.client = client;
-        if (options.buttons) options.buttons = Object.assign(this.options.buttons, options.buttons);
+        if (options && options.buttons)
+            options.buttons = Object.assign(
+                this.options.buttons,
+                options.buttons
+            );
         this.options = Object.assign(this.options, options);
         this.page = 0;
         this._key = this._generateString(5);
-        this.client.on("interactionCreate", (interaction: any) => {
-            if (!interaction.isButton()) return;
-            const ids = [`next-${this._key}`, `back-${this._key}`];
-            const filter = (i: any) => (ids.includes(i.customId) && this.authorizedUsers.includes(i.user.id));
-            if (!(filter(interaction))) return;
-            let handlePage = () => {
-                if (this._actionRow.components[1] instanceof MessageButton)
-                    this._actionRow.components[1].setLabel(this._getPageLabel());
-            }; //Update page label
-            handlePage = handlePage.bind(this);
-            switch (interaction.customId) {
-                case `next-${this._key}`:
-                    this.page = this.page + 1 < this.pages.length ? ++this.page : 0;
-                    handlePage();
-                    interaction.update({
-                        embeds: [this.pages[this.page]],
-                        components: [this._actionRow],
-                    }).catch(() => true);
-                    break;
-                case `back-${this._key}`:
-                    this.page = this.page > 0 ? --this.page : this.pages.length - 1;
-                    handlePage();
-                    interaction.update({
-                        embeds: [this.pages[this.page]],
-                        components: [this._actionRow],
-                    }).catch(() => true);
-                    break;
-            }
-            setTimeout(async () => {
-                handlePage();
-                for (let i = 0; i < this._actionRow.components.length; i++) {
-                    this._actionRow.components[i].setDisabled(true);
-                }
-                await interaction.update({
-                    embeds: [this.pages[this.page]],
-                    components: [this._actionRow],
-                }).catch(() => true);
-            }, this.options.timeout);
-        });
     }
 
     /**
@@ -124,12 +101,14 @@ class Pagination {
      * @private
      */
     private _generateString(length: number) {
-        let result           = "";
-        const characters       = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let result = "";
+        const characters =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         const charactersLength = characters.length;
         for (let i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() * 
- charactersLength));
+            result += characters.charAt(
+                Math.floor(Math.random() * charactersLength)
+            );
         }
         return result;
     }
@@ -171,13 +150,15 @@ class Pagination {
      * @param interaction - If you are not providing channel, set channel to false and provide a command interaction here
      * @return {boolen}
      */
-    public async send(channel: TextChannel, interaction: CommandInteraction) {
+    public async send(channel: TextChannel, i: CommandInteraction) {
         if (!this.pages) throw new Error("Pages not set");
         if (!this.authorizedUsers) throw new Error("Authorized Users not set");
-        if (!channel && !(interaction && interaction?.isCommand?.())) {
-            throw new Error("You should either provide channel or command interaction, set channel to false if you are providing interaction");
+        if (!channel && !(i && i?.isCommand?.())) {
+            throw new Error(
+                "You should either provide channel or command interaction, set channel to false if you are providing interaction"
+            );
         }
-        if (interaction && !interaction.deferred && !interaction.replied) await interaction.deferReply();
+        if (i && !i.deferred && !i.replied) await i.deferReply();
         this._actionRow = new MessageActionRow();
         const backButton = new MessageButton()
             .setLabel(this.options.buttons.back.label)
@@ -192,21 +173,82 @@ class Pagination {
             .setLabel(this.options.buttons.next.label)
             .setStyle(this.options.buttons.next.style)
             .setCustomId(`next-${this._key}`);
-        this._actionRow.addComponents(
-            backButton,
-            pageButton,
-            nextButton,
-        );
-        if (channel)
-            channel.send({
+        this._actionRow.addComponents(backButton, pageButton, nextButton);
+        let msg;
+        if (channel) {
+            msg = await channel.send({
                 embeds: [this.pages[this.page]],
                 components: [this._actionRow],
             });
-        else if (interaction)
-            interaction.followUp({
+        } else if (i) {
+            msg = await i.followUp({
                 embeds: [this.pages[this.page]],
                 components: [this._actionRow],
             });
+        } else {
+            return false;
+        }
+        msg = msg as Message;
+        const ids = [`next-${this._key}`, `back-${this._key}`];
+        const filter = ((i: any) =>
+            ids.includes(i.customId) &&
+            this.authorizedUsers.includes(i.user.id)).bind(this);
+        const collector = msg.createMessageComponentCollector({
+            filter,
+            componentType: "BUTTON",
+            time: this.options.timeout,
+        });
+        collector.on("collect", (interaction: ButtonInteraction) => {
+            const handlePage = (() => {
+                if (this._actionRow.components[1] instanceof MessageButton)
+                    this._actionRow.components[1].setLabel(
+                        this._getPageLabel()
+                    );
+            }).bind(this); //Update page label
+            switch (interaction.customId) {
+                case `next-${this._key}`:
+                    this.page =
+                        this.page + 1 < this.pages.length ? ++this.page : 0;
+                    handlePage();
+                    interaction
+                        .update({
+                            embeds: [this.pages[this.page]],
+                            components: [this._actionRow],
+                        })
+                        .catch(() => true);
+                    break;
+                case `back-${this._key}`:
+                    this.page =
+                        this.page > 0 ? --this.page : this.pages.length - 1;
+                    handlePage();
+                    interaction
+                        .update({
+                            embeds: [this.pages[this.page]],
+                            components: [this._actionRow],
+                        })
+                        .catch(() => true);
+                    break;
+            }
+            collector.on(
+                "end",
+                async (collected: Collection<Snowflake, Interaction>) => {
+                    const interaction = collected.last() as ButtonInteraction;
+                    for (
+                        let i = 0;
+                        i < this._actionRow.components.length;
+                        i++
+                    ) {
+                        this._actionRow.components[i].setDisabled(true);
+                    }
+                    await interaction
+                        .update({
+                            embeds: [this.pages[this.page]],
+                            components: [this._actionRow],
+                        })
+                        .catch(() => true);
+                }
+            );
+        });
         return true;
     }
 }

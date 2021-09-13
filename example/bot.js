@@ -15,29 +15,34 @@ client.on("messageCreate", async (message) => {
     await client.application.commands.set([
         {
             name: "commands",
-            description: "Shows all commands!"
+            description: "Shows all commands!",
         },
         {
             name: "ping",
-            description: "Shows my ping!"
+            description: "Shows my ping!",
         },
         {
             name: "server",
-            description: "Show server's name"
-        }
+            description: "Show server's name",
+        },
     ]);
-})
+    message.reply("Done!");
+});
 client.on("interactionCreate", async (interaction) => {
     if (!interaction.isCommand()) return;
     const { commandName: cmd } = interaction;
 
     if (cmd === "commands") {
         const pages = [
-            (new MessageEmbed).setTitle("Page 1"),
-            (new MessageEmbed).setTitle("Page 2"),
+            new MessageEmbed().setTitle("Page 1"),
+            new MessageEmbed().setTitle("Page 2"),
         ];
-        pages[0].setDescription("To see my commands, go to the next page using buttons.");
-        pages[1].setDescription("My General commands\n```\n• commands - Shows all commands!\n• ping - Shows my ping!\n• server - Show server's name\n```");
+        pages[0].setDescription(
+            "To see my commands, go to the next page using buttons."
+        );
+        pages[1].setDescription(
+            "My General commands\n```\n• commands - Shows all commands!\n• ping - Shows my ping!\n• server - Show server's name\n```"
+        );
         const pagination = new Pagination(client);
         pagination.setPages(pages);
         pagination.setAuthorizedUsers([interaction.user.id]);
@@ -45,7 +50,9 @@ client.on("interactionCreate", async (interaction) => {
     } else if (cmd === "ping") {
         await interaction.reply(`Pong!\nMy latency: ${client.ws.ping}ms`);
     } else if (cmd === "server") {
-        await interaction.reply(`This server's name is ${interaction.guild.name}`);
+        await interaction.reply(
+            `This server's name is ${interaction.guild.name}`
+        );
     }
 });
 client.login(process.env.DISCORD_TOKEN);
