@@ -73,6 +73,7 @@ class Pagination {
 
     constructor(client: Client, options: PaginationOptions) {
         this.client = client;
+        if (options.buttons) options.buttons = Object.assign(this.options.buttons, options.buttons);
         this.options = Object.assign(this.options, options);
         this.page = 0;
         this._key = this._generateString(5);
@@ -93,7 +94,7 @@ class Pagination {
                     interaction.update({
                         embeds: [this.pages[this.page]],
                         components: [this._actionRow],
-                    });
+                    }).catch(() => true);
                     break;
                 case `back-${this._key}`:
                     this.page = this.page > 0 ? --this.page : this.pages.length - 1;
@@ -101,18 +102,18 @@ class Pagination {
                     interaction.update({
                         embeds: [this.pages[this.page]],
                         components: [this._actionRow],
-                    });
+                    }).catch(() => true);
                     break;
             }
             setTimeout(async () => {
+                handlePage();
                 for (let i = 0; i < this._actionRow.components.length; i++) {
                     this._actionRow.components[i].setDisabled(true);
                 }
-                handlePage();
                 await interaction.update({
                     embeds: [this.pages[this.page]],
                     components: [this._actionRow],
-                });
+                }).catch(() => true);
             }, this.options.timeout);
         });
     }
@@ -176,7 +177,7 @@ class Pagination {
         if (!channel && !(interaction && interaction?.isCommand?.())) {
             throw new Error("You should either provide channel or command interaction, set channel to false if you are providing interaction");
         }
-        if (interaction) await interaction.deferReply();
+        if (interaction && !interaction.deferred && !interaction.replied) await interaction.deferReply();
         this._actionRow = new MessageActionRow();
         const backButton = new MessageButton()
             .setLabel(this.options.buttons.back.label)

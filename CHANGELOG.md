@@ -10,6 +10,29 @@ The displayed date is in the format `DD-MM-YYYY`
 
 > **Released:** `TBA`
 
+- Support yarn
+
+## [v0.2.2]
+
+> **Released:** `21-08-2021`
+
+### Bug fixes
+
+- fix(Pagination): suppress "unknow interaction" error. Originally took from [Siris01@002a959](https://github.com/Siris01/discord-pagination/commit/002a959b95ef1b83b94cd2825830e3d47310afc0)
+
+## [v0.2.1]
+
+> **Released:** `19-08-2021`
+
+### Bug fixes
+
+- fix(Pagination): fix bug related to interactions. Only defer reply if not replied or deferred already
+- fix(Pagination): like when you provide button options, if you didn't provide either `back` or `next` or `page`. Then it would throw an error `Cannot read property 'label' of undefined`
+
+## [v0.2.0]
+
+> **Released:** `19-08-2021`
+
 ### New features
 
 - feat: support yarn
@@ -24,6 +47,7 @@ The displayed date is in the format `DD-MM-YYYY`
 - refactor(Pagination): rename `options.nextBtn` -> `options.buttons.next`
 - refactor(Pagination): rename `options.backBtn` -> `options.buttons.back`
 - To send a command interaction, now you have to `send(null, interaction)` instead of `send(interaction)`
+- To send reply to normal commands, now you have to use `send(message.channel)`
 
 ### Changes
 
@@ -62,6 +86,8 @@ The displayed date is in the format `DD-MM-YYYY`
 
 ### Initial release
 
+[v0.2.2]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.2.2
+[v0.2.1]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.2.1
 [v0.2.0]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.2.0
 [v0.1.4]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.1.4
 [v0.1.3]: https://github.com/Welcome-Bot/welcome-bot/releases/tag/v0.1.3
