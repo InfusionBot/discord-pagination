@@ -18,7 +18,7 @@ export interface PaginationOptions {
             /** One of [MessageButtonStyleResolvable](https://discord.js.org/#/docs/main/master/typedef/MessageButtonStyleResolvable), default: `PRIMARY` */
             style: MessageButtonStyleResolvable;
         };
-        /** A disabled button which shows current page, default: `Page {{page}} / {{total_pages}}` */
+        /** A disabled button which shows current page, default: Page {{page}} / {{total_pages}} */
         page: string;
     };
     /** Time in milliseconds after which all buttons are disabled, default: `30000` (30 seconds) */
