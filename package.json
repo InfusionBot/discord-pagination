@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "publishPkg": "npm run build && npm publish --access=public",
+    "publishPkg": "npm run build && npm publish --access=public && npx yarn publish",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
