@@ -13,7 +13,8 @@
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
-    "docs": "typedoc --options typedoc.json"
+    "docs": "typedoc --options typedoc.json",
+    "test": "node example/bot.js"
   },
   "repository": {
     "type": "git",
