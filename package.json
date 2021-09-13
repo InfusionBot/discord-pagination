@@ -1,6 +1,6 @@
 {
   "name": "djs-pagination-buttons",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Discord.js v13 pagination with buttons",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "publishPkg": "npm run build && npm publish --access=public",
+    "publishPkg": "npm run build && npm publish --access=public && npx yarn publish",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "format:check": "prettier --check .",
     "format": "prettier --write .",

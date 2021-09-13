@@ -6,9 +6,15 @@ The displayed date is in the format `DD-MM-YYYY`
 
 [Older changelogs](#older-changelogs)
 
-## [v0.2.2]
+## [v0.3.0]
 
 > **Released:** `TBA`
+
+- Support yarn
+
+## [v0.2.2]
+
+> **Released:** `21-08-2021`
 
 ### Bug fixes
 
@@ -22,6 +28,14 @@ The displayed date is in the format `DD-MM-YYYY`
 
 - fix(Pagination): fix bug related to interactions. Only defer reply if not replied or deferred already
 - fix(Pagination): like when you provide button options, if you didn't provide either `back` or `next` or `page`. Then it would throw an error `Cannot read property 'label' of undefined`
+
+## [v0.2.0]
+
+> **Released:** `19-08-2021`
+
+### New features
+
+- feat: support yarn
 
 ## [v0.2.0]
 
