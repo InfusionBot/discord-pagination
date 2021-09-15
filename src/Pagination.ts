@@ -229,26 +229,22 @@ class Pagination {
                         .catch(() => true);
                     break;
             }
-            collector.on(
-                "end",
-                async (collected: Collection<Snowflake, Interaction>) => {
-                    const interaction = collected.last() as ButtonInteraction;
-                    for (
-                        let i = 0;
-                        i < this._actionRow.components.length;
-                        i++
-                    ) {
-                        this._actionRow.components[i].setDisabled(true);
-                    }
-                    await interaction
-                        .update({
-                            embeds: [this.pages[this.page]],
-                            components: [this._actionRow],
-                        })
-                        .catch(() => true);
-                }
-            );
         });
+        collector.on(
+            "end",
+            async (collected: Collection<Snowflake, Interaction>) => {
+                const interaction = collected.last() as ButtonInteraction;
+                for (let i = 0; i < this._actionRow.components.length; i++) {
+                    this._actionRow.components[i].setDisabled(true);
+                }
+                await interaction
+                    .update({
+                        embeds: [this.pages[this.page]],
+                        components: [this._actionRow],
+                    })
+                    .catch(() => true);
+            }
+        );
         return true;
     }
 }
