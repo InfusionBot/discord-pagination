@@ -4,8 +4,10 @@
 
 ## Table of contents
 
-### Modules
+### Classes
 
-- [Pagination](modules/Pagination.md)
-- [index](modules/index.md)
-- [types](modules/types.md)
+- [Pagination](classes/Pagination.md)
+
+### Interfaces
+
+- [PaginationOptions](interfaces/PaginationOptions.md)

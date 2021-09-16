@@ -1,8 +1,6 @@
-[djs-pagination-buttons](../README.md) / [Exports](../modules.md) / [types](../modules/types.md) / PaginationOptions
+[djs-pagination-buttons](../README.md) / [Exports](../modules.md) / PaginationOptions
 
 # Interface: PaginationOptions
-
-[types](../modules/types.md).PaginationOptions
 
 Options for Pagination class
 
@@ -10,8 +8,8 @@ Options for Pagination class
 
 ### Properties
 
-- [buttons](types.PaginationOptions.md#buttons)
-- [timeout](types.PaginationOptions.md#timeout)
+- [buttons](PaginationOptions.md#buttons)
+- [timeout](PaginationOptions.md#timeout)
 
 ## Properties
 
@@ -31,11 +29,11 @@ Options for other buttons
 | `next` | `Object` | Next Button options |
 | `next.label` | `string` | Label for the button, default: `Next` |
 | `next.style` | `MessageButtonStyleResolvable` | One of [MessageButtonStyleResolvable](https://discord.js.org/#/docs/main/master/typedef/MessageButtonStyleResolvable), default: `PRIMARY` |
-| `page` | `string` | A disabled button which shows current page, default: `Page {{page}} / {{total_pages}}` |
+| `page` | `string` | A disabled button which shows current page, default: Page {{page}} / {{total_pages}} |
 
 #### Defined in
 
-[types.ts:6](https://github.com/Welcome-Bot/discord-pagination/blob/a5c9973/src/types.ts#L6)
+[types.ts:6](https://github.com/Welcome-Bot/discord-pagination/blob/36a7c31/src/types.ts#L6)
 
 ___
 
@@ -47,4 +45,4 @@ Time in milliseconds after which all buttons are disabled, default: `30000` (30 
 
 #### Defined in
 
-[types.ts:25](https://github.com/Welcome-Bot/discord-pagination/blob/a5c9973/src/types.ts#L25)
+[types.ts:25](https://github.com/Welcome-Bot/discord-pagination/blob/36a7c31/src/types.ts#L25)
