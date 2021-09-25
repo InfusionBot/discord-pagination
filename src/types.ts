@@ -1,4 +1,4 @@
-import { MessageButtonStyleResolvable } from "discord.js";
+import { MessageButtonStyleResolvable, EmojiIdentifierResolvable } from "discord.js";
 
 /** Options for Pagination class **/
 export interface PaginationOptions {
@@ -10,6 +10,8 @@ export interface PaginationOptions {
             label: string;
             /** One of [MessageButtonStyleResolvable](https://discord.js.org/#/docs/main/master/typedef/MessageButtonStyleResolvable), default: `SUCCESS` */
             style: MessageButtonStyleResolvable;
+            /** Emoji (optional) */
+            emoji?: EmojiIdentifierResolvable;
         };
         /** Next Button options */
         next: {
@@ -17,6 +19,8 @@ export interface PaginationOptions {
             label: string;
             /** One of [MessageButtonStyleResolvable](https://discord.js.org/#/docs/main/master/typedef/MessageButtonStyleResolvable), default: `PRIMARY` */
             style: MessageButtonStyleResolvable;
+            /** Emoji (optional) */
+            emoji?: EmojiIdentifierResolvable;
         };
         /** A disabled button which shows current page, default: Page {{page}} / {{total_pages}} */
         page: string;

@@ -6,9 +6,23 @@ The displayed date is in the format `DD-MM-YYYY`
 
 [Older changelogs](#older-changelogs)
 
-## [v0.3.0]
+## [v0.2.4]
 
 > **Released:** `TBA`
+
+### New features
+
+- add option to set emoji
+
+### Bug fixes
+
+- fix page label
+
+## [v0.2.3]
+
+> **Released:** `16-09-2021`
+
+### Changes
 
 - Support yarn
 
