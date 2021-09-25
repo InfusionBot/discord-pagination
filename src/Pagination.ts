@@ -120,7 +120,7 @@ class Pagination {
     private _getPageLabel() {
         const label = this.options.buttons.page
             .replace("{{page}}", `${this.page}`)
-            .replace("{{total_pages}}", `${this.pages.length}`);
+            .replace("{{total_pages}}", `${this.pages.length + 1}`);
         return label;
     }
 
@@ -159,20 +159,23 @@ class Pagination {
             );
         }
         if (i && !i.deferred && !i.replied) await i.deferReply();
+        const { buttons } = this.options;
         this._actionRow = new MessageActionRow();
         const backButton = new MessageButton()
-            .setLabel(this.options.buttons.back.label)
-            .setStyle(this.options.buttons.back.style)
+            .setLabel(buttons.back.label)
+            .setStyle(buttons.back.style)
             .setCustomId(`back-${this._key}`);
+        if (buttons.back.emoji !== "") backButton.setEmoji(buttons.back.emoji);
         const pageButton = new MessageButton()
             .setLabel(this._getPageLabel())
             .setStyle("SECONDARY")
             .setCustomId(`page-${this._key}`)
             .setDisabled(true);
         const nextButton = new MessageButton()
-            .setLabel(this.options.buttons.next.label)
-            .setStyle(this.options.buttons.next.style)
+            .setLabel(buttons.next.label)
+            .setStyle(buttons.next.style)
             .setCustomId(`next-${this._key}`);
+        if (buttons.next.emoji) nextButton.setEmoji(buttons.next.emoji);
         this._actionRow.addComponents(backButton, pageButton, nextButton);
         let msg;
         if (channel) {
