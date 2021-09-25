@@ -162,7 +162,7 @@ class Pagination {
         const { buttons } = this.options;
         this._actionRow = new MessageActionRow();
         const backButton = new MessageButton()
-            .setLabel(buttons.back.label)
+            .setLabel(`${buttons.back.label}`)
             .setStyle(buttons.back.style)
             .setCustomId(`back-${this._key}`);
         if (buttons.back.emoji !== "") backButton.setEmoji(buttons.back.emoji);
@@ -172,7 +172,7 @@ class Pagination {
             .setCustomId(`page-${this._key}`)
             .setDisabled(true);
         const nextButton = new MessageButton()
-            .setLabel(buttons.next.label)
+            .setLabel(`${buttons.next.label}`)
             .setStyle(buttons.next.style)
             .setCustomId(`next-${this._key}`);
         if (buttons.next.emoji) nextButton.setEmoji(buttons.next.emoji);
