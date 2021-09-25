@@ -24,16 +24,18 @@ Options for other buttons
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `back` | `Object` | Back Button options |
+| `back.emoji?` | `EmojiIdentifierResolvable` | Emoji (optional) |
 | `back.label` | `string` | Label for the button, default: `Back` |
 | `back.style` | `MessageButtonStyleResolvable` | One of [MessageButtonStyleResolvable](https://discord.js.org/#/docs/main/master/typedef/MessageButtonStyleResolvable), default: `SUCCESS` |
 | `next` | `Object` | Next Button options |
+| `next.emoji?` | `EmojiIdentifierResolvable` | Emoji (optional) |
 | `next.label` | `string` | Label for the button, default: `Next` |
 | `next.style` | `MessageButtonStyleResolvable` | One of [MessageButtonStyleResolvable](https://discord.js.org/#/docs/main/master/typedef/MessageButtonStyleResolvable), default: `PRIMARY` |
 | `page` | `string` | A disabled button which shows current page, default: Page {{page}} / {{total_pages}} |
 
 #### Defined in
 
-[types.ts:6](https://github.com/Welcome-Bot/discord-pagination/blob/e0cd07b/src/types.ts#L6)
+[types.ts:6](https://github.com/Welcome-Bot/discord-pagination/blob/ba4c78a/src/types.ts#L6)
 
 ___
 
@@ -45,4 +47,4 @@ Time in milliseconds after which all buttons are disabled, default: `30000` (30 
 
 #### Defined in
 
-[types.ts:25](https://github.com/Welcome-Bot/discord-pagination/blob/e0cd07b/src/types.ts#L25)
+[types.ts:29](https://github.com/Welcome-Bot/discord-pagination/blob/ba4c78a/src/types.ts#L29)
