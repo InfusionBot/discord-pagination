@@ -33,7 +33,7 @@ Options for other buttons
 
 #### Defined in
 
-[types.ts:6](https://github.com/Welcome-Bot/discord-pagination/blob/257cfa0/src/types.ts#L6)
+[types.ts:6](https://github.com/Welcome-Bot/discord-pagination/blob/e0cd07b/src/types.ts#L6)
 
 ___
 
@@ -45,4 +45,4 @@ Time in milliseconds after which all buttons are disabled, default: `30000` (30 
 
 #### Defined in
 
-[types.ts:25](https://github.com/Welcome-Bot/discord-pagination/blob/257cfa0/src/types.ts#L25)
+[types.ts:25](https://github.com/Welcome-Bot/discord-pagination/blob/e0cd07b/src/types.ts#L25)
