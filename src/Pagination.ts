@@ -119,8 +119,8 @@ class Pagination {
      */
     private _getPageLabel() {
         const label = this.options.buttons.page
-            .replace("{{page}}", `${this.page}`)
-            .replace("{{total_pages}}", `${this.pages.length + 1}`);
+            .replace("{{page}}", `${this.page + 1}`)
+            .replace("{{total_pages}}", `${this.pages.length}`);
         return label;
     }
 

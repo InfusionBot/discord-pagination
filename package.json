@@ -14,7 +14,7 @@
     "format:check": "prettier --check .",
     "format": "prettier --write .",
     "docs": "typedoc --options typedoc.json",
-    "test": "node example/bot.js"
+    "test": "npm run build && node example/bot.js"
   },
   "repository": {
     "type": "git",
