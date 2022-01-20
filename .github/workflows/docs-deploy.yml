@@ -21,7 +21,7 @@ jobs:
       - name: Build documentation
         run: npm run docs
       - name: Commit and push changes
-        uses: EndBug/add-and-commit@v7.4.0
+        uses: EndBug/add-and-commit@v8
         with:
           author_name: github-actions[bot]
           author_email: 41898282+github-actions[bot]@users.noreply.github.com
